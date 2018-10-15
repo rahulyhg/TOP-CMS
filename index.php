@@ -1,6 +1,5 @@
 <?php
 // error_reporting(0);
-
 header('content-type: text/html; charset=utf-8');
 // 项目根目录
 define('BASEPATH', dirname(__FILE__) . '/');
