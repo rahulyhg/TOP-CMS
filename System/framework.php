@@ -17,9 +17,9 @@ const DEFAULT_URL = 'Home/Index/index';
 // URL分隔符
 const URL_DELIMIT = '/';
 
-class Core {
+class App {
 
-    public static function run() {
+    public static function start() {
         // 设置时区
         date_default_timezone_set('PRC');
         // 注册自动加载类

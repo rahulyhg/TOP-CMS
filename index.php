@@ -10,6 +10,6 @@ define('FRAMEWORK', BASEPATH . 'System/');
 // DEBUG模式 （不生成缓存文件并且每次编译模板文件）
 define('DEBUG', false);
 // 加载框架
-require_once FRAMEWORK . 'Core.php';
+require_once FRAMEWORK . 'framework.php';
 // 运行
-Core::run();
+App::start();
