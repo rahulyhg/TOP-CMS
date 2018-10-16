@@ -15,7 +15,7 @@ class Index extends Manage {
     }
 
     public function welcome() {
-        $this->load('', [
+        $this->view('', [
             'info' => '欢迎使用'
         ]);
     }

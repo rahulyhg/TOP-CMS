@@ -34,7 +34,7 @@ class Addons {
     }
 
     /**
-     * 插件加载视图的方法（重新实现）
+     * 插件加载视图的方法（与应用load方法分离，重新实现）
      * @param string $file
      * @throws \Exception
      */
