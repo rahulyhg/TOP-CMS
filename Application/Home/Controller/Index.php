@@ -7,7 +7,7 @@ use Top\Controller;
 class Index extends Controller {
 
     public function index() {
-        $this->cache()->load();
+        $this->cache()->view();
     }
 
 }

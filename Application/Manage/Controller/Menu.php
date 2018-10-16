@@ -19,7 +19,7 @@ class Menu extends Manage {
             $this->params('parent', $parentInfo);
             $this->params('pid', $pid);
             $this->params('menu', $model->getTree());
-            $this->load();
+            $this->view();
         }
     }
 
@@ -30,7 +30,7 @@ class Menu extends Manage {
         $this->params('list', $list);
         $this->params('number', $model->count());
         $this->params('parent', $model->getMenuById($pid));
-        $this->load();
+        $this->view();
     }
 
     public function edit($id = '') {
@@ -47,7 +47,7 @@ class Menu extends Manage {
             $this->params('menu', $model->getTree());
             $this->params('pid', $info['pid']);
             $this->params('id', $id);
-            $this->load();
+            $this->view();
         }
     }
 

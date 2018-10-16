@@ -10,7 +10,7 @@ class Group extends Manage {
         $model = Loader::get('\Manage\Model\Group');
         $this->params('number', $model->count());
         $this->params('list', $model->lists());
-        $this->load();
+        $this->view();
     }
 
     public function add() {
@@ -21,7 +21,7 @@ class Group extends Manage {
             }
             $this->showJson($model->getError());
         } else {
-            $this->load();
+            $this->view();
         }
     }
 
@@ -39,7 +39,7 @@ class Group extends Manage {
             $this->showJson($model->getError());
         } else {
             $this->params('info', $info);
-            $this->load();
+            $this->view();
         }
     }
 
@@ -68,7 +68,7 @@ class Group extends Manage {
             $this->params('rules', explode(',', $info['rules']));
             $this->params('id', $id);
             $this->params('list', $model->getSelectLists());
-            $this->load();
+            $this->view();
         }
     }
 }

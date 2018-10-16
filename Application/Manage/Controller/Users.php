@@ -17,7 +17,7 @@ class Users extends Manage {
         $this->params('number', $number);
         $this->params('list', $model->lists([], 'sort asc, id desc', "$page->startNum, $page->listNum"));
         $this->params('page', $page->show());
-        $this->load();
+        $this->view();
     }
 
     /**
@@ -33,7 +33,7 @@ class Users extends Manage {
         } else {
             $group = Loader::get('\Manage\Model\Group');
             $this->params('group', $group->lists());
-            $this->load();
+            $this->view();
         }
     }
 
@@ -56,7 +56,7 @@ class Users extends Manage {
             $group = Loader::get('\Manage\Model\Group');
             $this->params('group', $group->lists());
             $this->params('info', $info);
-            $this->load();
+            $this->view();
         }
     }
 

@@ -15,7 +15,7 @@ class Config extends Manage {
         $list = $model->getListByGroup($group);
         $this->params('list', $list);
         $this->params('group', $group);
-        $this->load();
+        $this->view();
     }
 
     public function add() {
@@ -26,7 +26,7 @@ class Config extends Manage {
             }
             $this->showJson($model->getError());
         } else {
-            $this->load();
+            $this->view();
         }
     }
 
@@ -42,7 +42,7 @@ class Config extends Manage {
         } else {
             $this->params('info', $info);
             $this->params('id', $id);
-            $this->load();
+            $this->view();
         }
     }
 

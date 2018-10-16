@@ -16,7 +16,7 @@ class Field extends Manage {
         $this->params('number', $field->where($where)->count());
         $this->params('list', $field->lists($where));
         $this->params('mid', $mid);
-        $this->load();
+        $this->view();
     }
 
     public function add($mid) {
@@ -29,7 +29,7 @@ class Field extends Manage {
             $this->showJson($model->getError());
         } else {
             $this->params('mid', $mid);
-            $this->load();
+            $this->view();
         }
     }
 
@@ -45,7 +45,7 @@ class Field extends Manage {
             $info = $model->getFieldById($id);
             $this->params('info', $info);
             $this->params('id', $id);
-            $this->load();
+            $this->view();
         }
     }
 

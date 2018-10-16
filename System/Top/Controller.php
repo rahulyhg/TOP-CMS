@@ -34,7 +34,7 @@ class Controller {
      * @param string $file
      * @param array $params
      */
-    public function load($file = '', $params = []) {
+    public function view($file = '', $params = []) {
         $file = ($file == '') ? CONTROLLER . '/' . ACTION : $file;
         View::load($file, $this->viewCache, $params);
     }

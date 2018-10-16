@@ -10,7 +10,7 @@ class Model extends Manage {
         $model = Loader::get('\Manage\Model\ContentModel');
         $this->params('number', $model->count());
         $this->params('list', $model->lists());
-        $this->load();
+        $this->view();
     }
 
     public function add() {
@@ -21,7 +21,7 @@ class Model extends Manage {
             }
             $this->showJson($model->getError());
         } else {
-            $this->load();
+            $this->view();
         }
     }
 
@@ -45,7 +45,7 @@ class Model extends Manage {
         } else {
             $this->params('info', $model->getModelById($id));
             $this->params('id', $id);
-            $this->load();
+            $this->view();
         }
     }
 

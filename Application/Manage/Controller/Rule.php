@@ -15,7 +15,7 @@ class Rule extends Manage {
             $this->showJson($model->getError());
         } else {
             $this->params('tree', $model->getTree());
-            $this->load();
+            $this->view();
         }
     }
 
@@ -30,7 +30,7 @@ class Rule extends Manage {
         } else {
             $this->params('tree', $model->getTree());
             $this->params('info', $model->getRuleById($id));
-            $this->load();
+            $this->view();
         }
     }
 
@@ -38,7 +38,7 @@ class Rule extends Manage {
         $model = Loader::get('\Manage\Model\Rule');
         $this->params('number', $model->count());
         $this->params('tree', $model->getTree());
-        $this->load();
+        $this->view();
     }
 
     public function delete($id = '') {

@@ -11,7 +11,7 @@ class Category extends Manage {
         $list = $model->getTree();
         $this->params('number', $model->count());
         $this->params('list', $list);
-        $this->load();
+        $this->view();
     }
 
     public function add($pid = 0) {
@@ -28,7 +28,7 @@ class Category extends Manage {
             $this->params('list', $list);
             $this->params('pid', $pid);
             $this->params('model_list', $modelObject->lists());
-            $this->load();
+            $this->view();
         }
     }
 
@@ -48,7 +48,7 @@ class Category extends Manage {
             $this->params('info', $info);
             $this->params('id', $id);
             $this->params('model_list', $modelObject->lists());
-            $this->load();
+            $this->view();
         }
     }
 

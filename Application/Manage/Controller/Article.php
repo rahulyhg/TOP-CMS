@@ -11,7 +11,7 @@ class Article extends Manage {
         $model = Loader::get('\Manage\Model\Category');
         $list = $model->getTree();
         $this->params('list', $list);
-        $this->load('Article/index');
+        $this->view('Article/index');
     }
 
     public function add($categoryId) {
@@ -26,7 +26,7 @@ class Article extends Manage {
             $fieldList = $article->getFieldByCategoryId($categoryId);
             $this->params('field', $fieldList);
             $this->params('category_id', $categoryId);
-            $this->load();
+            $this->view();
         }
     }
 
@@ -46,7 +46,7 @@ class Article extends Manage {
             $this->params('category_id', $categoryId);
             $this->params('info', $info);
             $this->params('id', $id);
-            $this->load();
+            $this->view();
         }
     }
 
@@ -63,7 +63,7 @@ class Article extends Manage {
         $this->params('number', $all);
         $this->params('category', $categoryInfo);
         $this->params('page', $page->show());
-        $this->load($template);
+        $this->view($template);
     }
 
     public function delete() {

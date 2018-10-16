@@ -18,7 +18,7 @@ class Article extends Common {
             $this->error($categoryModel->getError());
         }
         $this->params('category', $category);
-        $this->cache()->load($category['index_template']);
+        $this->cache()->view($category['index_template']);
     }
 
     /**
@@ -36,7 +36,7 @@ class Article extends Common {
         $lists = $categoryModel->lists($category['id']);
         $this->params('lists', $lists);
         $this->params('category', $category);
-        $this->cache()->load($category['list_template']);
+        $this->cache()->view($category['list_template']);
     }
 
     /**
@@ -63,6 +63,6 @@ class Article extends Common {
         $template = (!$category_template) ? $info['detail_template'] : $category_template;
         $this->params('category', $categoryInfo);
         $this->params('info', $info);
-        $this->cache()->load($template);
+        $this->cache()->view($template);
     }
 }

@@ -12,7 +12,7 @@ class Channel extends Manage {
         $model = Loader::get('\Manage\Model\Channel');
         $parent = $model->getChannelById($pid);
         $lists = $model->lists(['pid' => $pid]);
-        $this->load('', [
+        $this->view('', [
             'list' => $lists,
             'parent' => $parent,
             'pid' => $pid,
@@ -30,7 +30,7 @@ class Channel extends Manage {
         } else {
             $this->params('id', $id);
             $this->params('tree', $model->getTree());
-            $this->load();
+            $this->view();
         }
     }
 
@@ -50,7 +50,7 @@ class Channel extends Manage {
             $this->params('info', $info);
             $this->params('pid', $info['pid']);
             $this->params('tree', $model->getTree());
-            $this->load();
+            $this->view();
         }
     }
 

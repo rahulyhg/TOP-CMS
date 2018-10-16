@@ -11,7 +11,7 @@ class Index extends Manage {
         $menuList = $menu->lists(['pid' => 0]);
         $this->params('rules', $this->userRules);
         $this->params('menu_list', $menuList);
-        $this->load();
+        $this->view();
     }
 
     public function welcome() {

@@ -18,7 +18,7 @@ class Auth extends Controller {
             }
             $this->showJson($model->getError());
         } else {
-            $this->load();
+            $this->view();
         }
     }
 

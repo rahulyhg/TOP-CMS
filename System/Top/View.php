@@ -17,17 +17,6 @@ class View {
     }
 
     /**
-     * 获取当前类实例（改用静态方法，此方法暂停使用）
-     * @return \Top\View
-     */
-    public static function getInstance() {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
-
-    /**
      * 设置要传入视图的参数
      * @param string $name
      * @param $value
