@@ -58,9 +58,9 @@ class Article extends Common {
             $this->error($article->getError());
         }
         // 当前所属分类配置的详情模板
-        $category_template = $categoryInfo['detail_template'];
+        $categoryTemplate = $categoryInfo['detail_template'];
         // 如果当前文档单独配置了详情模板则优先使用
-        $template = (!$category_template) ? $info['detail_template'] : $category_template;
+        $template = (!$categoryTemplate) ? $info['detail_template'] : $categoryTemplate;
         $this->params('category', $categoryInfo);
         $this->params('info', $info);
         $this->cache()->view($template);
