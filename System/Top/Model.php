@@ -172,6 +172,7 @@ class Model {
      */
     public function find($pkValue = '') {
         if ((empty($this->where) || $this->where == '') && $this->pk && $pkValue !== '') {
+            $this->where = [];
             $this->where[$this->pk] = $pkValue;
         }
         $result = $this->db->find($this->table, $this->field, $this->where, $this->order, $this->tables);
@@ -196,6 +197,7 @@ class Model {
      */
     public function delete($pkValue = '') {
         if ((empty($this->where) || $this->where == '') && $this->pk && $pkValue !== '') {
+            $this->where = [];
             $this->where[$this->pk] = $pkValue;
         }
         $result = $this->db->delete($this->table, $this->where, $this->order, $this->limit, $this->tables);
@@ -221,6 +223,7 @@ class Model {
      */
     public function update($data, $pkValue = '') {
         if ((empty($this->where) || $this->where == '') && $this->pk && $pkValue !== '') {
+            $this->where = [];
             $this->where[$this->pk] = $pkValue;
         }
         $result = $this->db->update($this->table, $this->where, $data);
@@ -280,17 +283,17 @@ class Model {
      * 初始化查询条件，以免带入下一次查询
      */
     private function _clean() {
-        unset($this->tables);
-        unset($this->field);
-        unset($this->where);
-        unset($this->order);
-        unset($this->limit);
-        unset($this->separate);
-//        $this->tables = '';
-//        $this->field = '';
-//        $this->where = '';
-//        $this->order = '';
-//        $this->limit = '';
-//        $this->separate = '';
+        // unset($this->tables);
+        // unset($this->field);
+        // unset($this->where);
+        // unset($this->order);
+        // unset($this->limit);
+        // unset($this->separate);
+        $this->tables = '';
+        $this->field = '';
+        $this->where = '';
+        $this->order = '';
+        $this->limit = '';
+        $this->separate = '';
     }
 }
