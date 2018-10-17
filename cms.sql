@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-10-17 22:05:24
+Date: 2018-10-17 22:44:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,24 +51,11 @@ CREATE TABLE `cms_channel` (
   `url` char(255) DEFAULT NULL,
   `sort` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_channel
 -- ----------------------------
-INSERT INTO `cms_channel` VALUES ('9', '0', '首页', '/', '0');
-INSERT INTO `cms_channel` VALUES ('10', '0', '逸迹时光', '/', '1');
-INSERT INTO `cms_channel` VALUES ('11', '0', '环境展示', '/Home/Article/lists/category/envi1', '2');
-INSERT INTO `cms_channel` VALUES ('12', '0', '逸迹住宅', '/', '3');
-INSERT INTO `cms_channel` VALUES ('13', '0', '新闻动态', '/', '4');
-INSERT INTO `cms_channel` VALUES ('14', '0', '留言中心', '/', '5');
-INSERT INTO `cms_channel` VALUES ('15', '0', '联系我们', '/', '6');
-INSERT INTO `cms_channel` VALUES ('16', '11', '优雅环境', '/Home/Article/lists/category/envi1', '0');
-INSERT INTO `cms_channel` VALUES ('17', '11', '餐厅会议', '/Home/Article/lists/category/envi2', '1');
-INSERT INTO `cms_channel` VALUES ('18', '11', '咖啡茶艺', '/Home/Article/lists/category/envi3', '2');
-INSERT INTO `cms_channel` VALUES ('19', '11', '棋牌KTV', '/Home/Article/lists/category/envi4', '3');
-INSERT INTO `cms_channel` VALUES ('20', '13', '公司新闻', '/', '0');
-INSERT INTO `cms_channel` VALUES ('21', '13', '行业新闻', '/', '1');
 
 -- ----------------------------
 -- Table structure for `cms_config`
@@ -106,31 +93,11 @@ CREATE TABLE `cms_files` (
   `hash` char(32) NOT NULL,
   `create_time` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_files
 -- ----------------------------
-INSERT INTO `cms_files` VALUES ('1', '/Uploads/files/2018/10/01/5bb107f84894c.zip', 'db2610c69e2c3f8d17da14dcedb50a32', '1538328568');
-INSERT INTO `cms_files` VALUES ('2', '/Uploads/images/2018/10/01/5bb108549e519.jpg', '0108de00a538b75b4a80a285e1011efc', '1538328660');
-INSERT INTO `cms_files` VALUES ('3', '/Uploads/images/2018/10/01/5bb108571907a.jpg', '8bc519f66323b19181d2199c2c4d600e', '1538328663');
-INSERT INTO `cms_files` VALUES ('4', '/Uploads/images/2018/10/08/5bbab1828e7b0.png', '66d91a7617b3c5e2d2ba8d9bd6ae951e', '1538961794');
-INSERT INTO `cms_files` VALUES ('5', '/Uploads/files/2018/10/08/5bbabcc6ed069.zip', '64c2459b64b7efdb2e82fd714bbe03e7', '1538964679');
-INSERT INTO `cms_files` VALUES ('6', '/Uploads/files/2018/10/08/5bbabcf93399d.zip', 'e23ae58c9f6236a8bfa738e3cafd589b', '1538964729');
-INSERT INTO `cms_files` VALUES ('7', '/Uploads/images/2018/10/09/5bbc604d75877.jpg', '44b927c106c5acbe70281c0dd2f50033', '1539072077');
-INSERT INTO `cms_files` VALUES ('8', '/Uploads/images/2018/10/09/5bbc6b5ea3c8f.jpg', '4af859376ea9082ddcec3b9f654ffa04', '1539074910');
-INSERT INTO `cms_files` VALUES ('9', '/Uploads/images/2018/10/09/5bbc92d43ac8e.jpg', 'c3037dfcb334ff11aaa5184a221740ce', '1539085012');
-INSERT INTO `cms_files` VALUES ('10', '/Uploads/images/2018/10/17/5bc6f36ed201c.png', '0eba384d8723f1f885c31f43a1528ceb', '1539765102');
-INSERT INTO `cms_files` VALUES ('11', '/Uploads/images/2018/10/17/5bc6f3d6cf6b9.png', '432fb624e0757b3d397bdad40d3fc32d', '1539765206');
-INSERT INTO `cms_files` VALUES ('12', '/Uploads/images/2018/10/17/5bc6f3d975550.png', '6bc4ee80b93343673f05f71d27396006', '1539765209');
-INSERT INTO `cms_files` VALUES ('13', '/Uploads/images/2018/10/17/5bc6f3dc5ed32.png', '72b7a2c6267faecac8b77eff77f62a9d', '1539765212');
-INSERT INTO `cms_files` VALUES ('14', '/Uploads/images/2018/10/17/5bc6f3dfaa9a7.png', 'bf3ae82f48aed206cb199c2c1ff6c6b2', '1539765215');
-INSERT INTO `cms_files` VALUES ('15', '/Uploads/images/2018/10/17/5bc6f3e354767.png', '1258167b2815658d7115ae26ae3f5b55', '1539765219');
-INSERT INTO `cms_files` VALUES ('16', '/Uploads/images/2018/10/17/5bc6f3e8c83dc.png', 'e9ca744bd74c9e130a8410022a2dd293', '1539765224');
-INSERT INTO `cms_files` VALUES ('17', '/Uploads/images/2018/10/17/5bc6f41ff2b65.png', '37d9066165468bbfb7b65d562b2ccb95', '1539765280');
-INSERT INTO `cms_files` VALUES ('18', '/Uploads/images/2018/10/17/5bc6f422b5f82.png', '60e24f88ed73b5e1c144110385cd5f00', '1539765282');
-INSERT INTO `cms_files` VALUES ('19', '/Uploads/images/2018/10/17/5bc6f425583de.png', '94b8cd2a0a1171b1a98de251ff7e44d5', '1539765285');
-INSERT INTO `cms_files` VALUES ('20', '/Uploads/images/2018/10/17/5bc6f428aba7f.png', 'f05bf31063c3f6eb9e8db8a5970410f8', '1539765288');
 
 -- ----------------------------
 -- Table structure for `cms_menu`
@@ -175,7 +142,7 @@ CREATE TABLE `cms_model` (
   `sort` int(11) DEFAULT '0',
   `list_display` char(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_model
@@ -199,7 +166,7 @@ CREATE TABLE `cms_model_field` (
   `sort` int(11) DEFAULT '0',
   `list_display` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_model_field
