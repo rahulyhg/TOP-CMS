@@ -5,10 +5,6 @@ return [
     'detail' => [
         '[category][:id]',
         'Home/Article/detail'
-    ],
-	'manage' => [
-		null,
-		'Manage'
-	]
+    ]
 
 ];
