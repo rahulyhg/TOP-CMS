@@ -1,7 +1,4 @@
 <?php
-/**
- * @author TOP糯米 2018 我会坚持做我喜欢的事
- */
 
 namespace Manage\Controller;
 
