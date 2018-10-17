@@ -9,7 +9,7 @@
                 <select name="pid">
                     <option value="0">无</option>
                     {loop $tree as $vo}
-                        <option value="{$vo['id']}" {if $info['pid'] == $vo['id']}selected{/if}>{$vo['space']}{if $vo['name']}{$vo['name']}{else /}{$vo['action']}{/if}</option>
+                        <option value="{$vo['id']}">{$vo['space']}{if $vo['name']}{$vo['name']}{else /}{$vo['action']}{/if}</option>
                     {/loop}
                 </select>
                 </div>

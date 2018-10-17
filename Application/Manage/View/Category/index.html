@@ -29,16 +29,16 @@
             </thead>
             <tbody class="x-cate">
                 {loop $list as $vo}
-                    <tr cate-id="{$vo['id']}" fid="{$vo['pid']}">
+                    <tr cate-id="{$vo['id']}" fid="0">
                         <td>
                             <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="{$vo['id']}"><i class="layui-icon">&#xe605;</i></div>
                         </td>
                         <td>{$vo['id']}</td>
                         <td>
                             {$vo['space']}
-                            <i class="layui-icon x-show" status='true'>&#xe623;</i> {$vo['category_title']}
+                            |- {$vo['title']}
                         </td>
-                        <td>{$vo['category_name']}</td>
+                        <td>{$vo['name']}</td>
                         <td><!--<input type="text" class="layui-input x-sort" name="order" value="{$vo['sort']}">-->{$vo['sort']}</td>
                         <td class="td-manage">
                             <button class="layui-btn layui-btn layui-btn-xs" onclick="x_admin_show('添加子分类','{:u('/Manage/Category/add/pid/' . $vo['id'])}')"><i class="layui-icon"></i>添加子分类</button>

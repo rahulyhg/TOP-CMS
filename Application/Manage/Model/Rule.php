@@ -47,7 +47,7 @@ class Rule extends Model {
             '__construct',
             'params',
             'cache',
-            'load',
+            'view',
             'message',
             'redirect',
             'showJson',
@@ -63,9 +63,11 @@ class Rule extends Model {
                 $uriName = $name;
                 if (class_exists($className)) {
                     $methods = get_class_methods($className);
+                    $k = 0;
                     for ($j = 0; $j < count($methods); $j++) {
                         if (!in_array($methods[$j], $filterList)) {
-                            $lists[$uriName][$j] = $uriName . URL_DELIMIT . $methods[$j];
+                            $lists[$uriName][$k] = $uriName . URL_DELIMIT . $methods[$j];
+                            $k++;
                         }
                     }
                 }

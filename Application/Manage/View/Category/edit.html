@@ -9,7 +9,7 @@
                 <select name="pid">
                     <option value="0">顶级分类</option>
                     {loop $list as $vo}
-                        <option value="{$vo['id']}" {if $info['pid'] == $vo['id']}selected{/if}>{$vo['space']}{$vo['category_title']}</option>
+                        <option value="{$vo['id']}" {if $info['pid'] == $vo['id']}selected{/if}>{$vo['space']}{$vo['title']}</option>
                     {/loop}
                 </select>
             </div>
@@ -19,7 +19,7 @@
                 <span class="x-red">*</span>分类标识
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="category_name" name="category_name" value="{$info['category_name']}" required="" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" id="name" name="name" value="{$info['name']}" required="" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span>标识
@@ -30,7 +30,7 @@
                 <span class="x-red">*</span>分类名称
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="category_title" name="category_title" value="{$info['category_title']}" required="" autocomplete="off" class="layui-input">
+                <input type="text" id="title" name="title" value="{$info['title']}" required="" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span>分类的中文名称

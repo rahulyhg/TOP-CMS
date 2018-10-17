@@ -19,20 +19,20 @@ class Category extends Model {
     }
 
     public function getCategoryByName($name, $field = false) {
-        return $this->field($field)->where(['category_name' => $name])->find();
+        return $this->field($field)->where(['name' => $name])->find();
     }
 
     public function addCategory() {
         $data = $this->getData();
-        if (!$data['category_name']) {
+        if (!$data['name']) {
             $this->error = '请输入分类标识';
             return false;
         }
-        if (!$data['category_title']) {
+        if (!$data['title']) {
             $this->error = '请输入分类名称';
             return false;
         }
-        if ($this->where(['category_name' => $data['category_name']])->count() > 0) {
+        if ($this->where(['name' => $data['name']])->count() > 0) {
             $this->error = '分类标识已存在';
             return false;
         }
@@ -45,17 +45,17 @@ class Category extends Model {
 
     public function saveCategory($id) {
         $data = $this->getData();
-        if (!$data['category_name']) {
+        if (!$data['name']) {
             $this->error = '请输入分类标识';
             return false;
         }
-        if (!$data['category_title']) {
+        if (!$data['title']) {
             $this->error = '请输入分类名称';
             return false;
         }
         $info = $this->getCategoryById($id);
-        if ($data['category_name'] != $info['category_name']) {
-            if ($this->where(['category_name' => $data['category_name']])->count() > 0) {
+        if ($data['name'] != $info['name']) {
+            if ($this->where(['name' => $data['name']])->count() > 0) {
                 $this->error = '分类标识已存在';
                 return false;
             }

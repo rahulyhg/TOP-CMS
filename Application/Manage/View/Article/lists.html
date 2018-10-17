@@ -2,7 +2,7 @@
 <div class="x-nav">
         <span class="layui-breadcrumb">
             <a>
-                <cite>[{$category['category_title']}]内容列表</cite>
+                <cite>[{$category['title']}]内容列表</cite>
             </a>
         </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
@@ -12,7 +12,7 @@
 <div class="x-body">
     <xblock>
         <a class="layui-btn layui-btn-primary" href="{:u('/Manage/Article/index')}">返回</a>
-        <button class="layui-btn" onclick="x_admin_show('[{$category['category_title']}]发布内容','{:u('/Manage/Article/add/categoryId/' . $category['id'])}')"><i class="layui-icon"></i>发布</button>
+        <button class="layui-btn" onclick="x_admin_show('[{$category['title']}]发布内容','{:u('/Manage/Article/add/categoryId/' . $category['id'])}')"><i class="layui-icon"></i>发布</button>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <span class="x-right" style="line-height:40px">共有数据：{$number} 条</span>
     </xblock>

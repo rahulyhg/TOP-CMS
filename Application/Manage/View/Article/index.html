@@ -25,13 +25,13 @@
                     <tr cate-id="{$vo['id']}" fid="0">
                         <td>{$vo['id']}</td>
                         <td>
-                            {$vo['space']} {$vo['category_title']}
+                            {$vo['space']} |- {$vo['title']}
                         </td>
-                        <td>{$vo['category_name']}</td>
+                        <td>{$vo['name']}</td>
                         <td><!--<input type="text" class="layui-input x-sort" name="order" value="{$vo['sort']}">-->{$vo['sort']}</td>
                         <td class="td-manage">
                             {if $vo['create_content'] == 1}
-                                <button class="layui-btn layui-btn-xs" onclick="x_admin_show('[{$vo['category_title']}]发布内容', '{:u('/Manage/Article/add/categoryId/' . $vo['id'])}')">发布内容</button>
+                                <button class="layui-btn layui-btn-xs" onclick="x_admin_show('[{$vo['title']}]发布内容', '{:u('/Manage/Article/add/categoryId/' . $vo['id'])}')">发布内容</button>
                                 <a class="layui-btn layui-btn-warm layui-btn-xs" href="{:u('/Manage/Article/lists/categoryId/' . $vo['id'])}">内容管理</a>
                             {else /}
                                 无法操作
