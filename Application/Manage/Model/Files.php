@@ -41,8 +41,8 @@ class Files extends Model {
     public function getFileByHash($hash) {
         return $this->where(['hash' => $hash])->find();
     }
-	
-	public function getFileById($id) {
+
+    public function getFileById($id) {
         return $this->where(['id' => $id])->find();
-	}
+    }
 }
