@@ -61,7 +61,7 @@ class Model {
             foreach ($tableInfo as $value) {
                 //如果表字段不等于当前主键，并且映射后数组中存在以表字段为键名的值，则为$data赋值
                 if ($value['Field'] != $this->pk && isset($mapData[$value['Field']])) {
-                    if (!$mapData[$value['Field']]) {
+                    if (false === $mapData[$value['Field']]) {
                         if ($value['Default']) {
                             $mapData[$value['Field']] = $value['Default'];
                         } else if (stristr($value['Type'], 'int')) {
