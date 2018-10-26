@@ -27,28 +27,5 @@ class Article extends Model {
         }
         return $article;
     }
-
-    public function getSearchCategogry() {
-        $ids = \Manage\Helper::Config('SEARCH_CATEGORY');
-        $categoryArray = explode(',', $ids);
-        return $categoryArray;
-    }
-
-    public function search($keywords, $category = '', $limit = false, $count = false) {
-        $categoryArray = $this->getSearchCategogry();
-        if (!in_array($category, $categoryArray)) {
-            $this->error = '该分类无法被搜索~';
-            return false;
-        }
-        $cate = (new Category())->category($category);
-        $table = Loader::get('\Manage\Model\Category')->getTableNameByCategoryId($cate['id']);
-        $model = new Model($table);
-        $where = "category_id = $category and (title like '%{$keywords}%' or content like '%{$keywords}%')";
-        if ($count) {
-            $data = $model->where($where)->count();
-        } else {
-            $data = $model->where($where)->limit($limit)->select();
-        }
-        return $data;
-    }
+    
 }

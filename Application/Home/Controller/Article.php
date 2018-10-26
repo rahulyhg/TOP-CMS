@@ -70,19 +70,5 @@ class Article extends Common {
         $this->params('info', $info);
         $this->cache()->view($template);
     }
-
-    public function search($keywords = '', $category = '') {
-        $keywords = $this->filter($keywords);
-        $model = Loader::get('\Home\Model\Article');
-        $categorys = $model->getSearchCategogry();
-        if (!$category) $category = $categorys[0];
-        // $page = new Page(2, $model->search($keywords, $category, false, true));
-        $lists = $model->search($keywords, $category);
-        // $this->params('page', $page->show());
-        $this->params('category_id', $category);
-        $this->params('keywords', $keywords);
-        $this->params('categorys', $categorys);
-        $this->params('lists', $lists);
-        $this->view();
-    }
+    
 }
