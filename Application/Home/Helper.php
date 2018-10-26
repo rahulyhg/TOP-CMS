@@ -7,12 +7,6 @@ use Top\Loader;
 
 class Helper {
 
-    public static function getCategory($category = 0) {
-        $model = Loader::get('\Manage\Model\Category');
-        $data = $model->where(['pid' => $category])->select();
-        return $data;
-    }
-
     public static function getCategoryName($category = 0) {
         $model = Loader::get('\Manage\Model\Category');
         return $model->getCategoryById($category, 'title')['title'];
