@@ -11,14 +11,14 @@ class Manage extends Controller {
     public function __construct() {
         $this->uid = \Manage\Helper::isLogin();
         if (!$this->uid) {
-            $this->redirect('Manage/Auth');
+            $this->redirect('login');
         }
         $auth = session('user_auth');
         $this->params('user_auth', $auth);
         $action = MODULE . '/' . CONTROLLER . '/' . ACTION;
         $this->userRules = $auth['rules'];
         if (!in_array($action, $this->userRules)) {
-            $this->error('权限不足', 'return false;');
+            $this->error('权限不足');
         }
     }
 }

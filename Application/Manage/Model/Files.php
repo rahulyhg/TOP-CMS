@@ -9,6 +9,10 @@ class Files extends Model {
     protected $pk = 'id';
     protected $map = [];
 
+    public function lists($order = 'create_time desc', $limit = false) {
+        return $this->order($order)->limit($limit)->select();
+    }
+
     public function upload($filename) {
         if (file_exists($filename)) {
             $hash = md5_file($filename);
@@ -44,5 +48,29 @@ class Files extends Model {
 
     public function getFileById($id) {
         return $this->where(['id' => $id])->find();
+    }
+
+    public function deleteFiles($id) {
+        if (is_array($id)) {
+            for ($i = 0; $i < count($id); $i++) {
+                $info = $this->getFileById((int)$id[$i]);
+                @unlink($info['path']);
+                if (!$this->delete((int)$id[$i])) {
+                    $this->error = '部分数据删除失败';
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            $id = (int)$id;
+            $info = $this->getFileById($id);
+            @unlink('.' . $info['path']);
+            if ($this->delete($id)) {
+                return true;
+            }
+            echo $this->_sql();
+            $this->error = '删除失败';
+            return false;
+        }
     }
 }

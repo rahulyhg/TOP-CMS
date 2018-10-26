@@ -1,0 +1,23 @@
+{view name="Base/header"}
+
+<div class="touch_bg">&nbsp;</div>
+<!-- E touch-top-wrapper -->
+<div class="blank_h">&nbsp;</div>
+<!--正文begin-->
+<div class="technology_bg">
+    <div class="technology_div anim anim-1">
+        <div class="technology_con">
+            <img src="{:\Manage\Helper::getFile($info['cover'])['path']}" class="imgs" />
+            <h2>{$info['title']}</h2>
+            <p style="text-align: center;"><br/></p><p>{$info['description']}</p>        </div>
+    </div>
+</div>
+<div class="technology_bg2" id="contactus">
+    <div class="technology_div2 anim anim-2">
+        <h2>多一点沟通,总是有益处!</h2>
+        咨询相关部门，或通过以下方式与我们联系，24小时全国免费客服热线<br/>        <a href="tel:{config name="USER_TEL"}" class="tel">{config name="USER_TEL"}</a>
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={config name="USER_QQ"}&site=qq&menu=yes" class="tqq">&nbsp;</a>
+    </div>
+</div>
+<!--正文end-->
+{view name="Base/footer"}

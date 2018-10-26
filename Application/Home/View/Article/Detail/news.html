@@ -1,0 +1,61 @@
+{view name="Base/header"}
+<div class="touch_bg">&nbsp;</div>
+<!-- E touch-top-wrapper -->
+<div class="blank_h">&nbsp;</div>
+<!--正文begin-->
+<div class="news_bg2">
+    <div class="wrap2">
+        <div class="news_t2 anim anim-1">{$category['title']}</div>
+        <div class="about_x anim anim-2">
+            <h1 class="show_t">{$info['title']}</h1>
+
+            <div class="con_line">发布日期： {:date('Y-m-d', $info['create_time'])}</div>
+            <div class="con_id">
+                {$info['content']}
+            </div>
+            <div class="fenxiang">
+                <div class="bdsharebuttonbox" style="float:right;"><a href="#" class="bds_more" data-cmd="more"></a><a
+                        href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina"
+                                                                                           data-cmd="tsina"
+                                                                                           title="分享到新浪微博"></a><a
+                        href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin"
+                                                                                       data-cmd="weixin"
+                                                                                       title="分享到微信"></a><a href="#"
+                                                                                                            class="bds_fbook"
+                                                                                                            data-cmd="fbook"
+                                                                                                            title="分享到Facebook"></a><a
+                        href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
+                <script>window._bd_share_config = {
+                    "common": {
+                        "bdSnsKey": {},
+                        "bdText": "",
+                        "bdMini": "2",
+                        "bdMiniList": false,
+                        "bdPic": "",
+                        "bdStyle": "0",
+                        "bdSize": "24"
+                    }, "share": {}
+                };
+                with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                <span class="span">分享到：</span>
+            </div>
+            <div class="prenext">
+
+                <span class="l">
+                    <!--prev:category,id,default,name-->
+                    {prev category="$category['id']" id="$info['id']" default="没有了" name="$prev"}
+                    上一篇：<a href="{$prev['url']}">{$prev['title']}</a><br/>
+                    {next category="$category['id']" id="$info['id']" default="没有了" name="$next"}
+                    下一篇：<a href="{$next['url']}">{$next['title']}</a>
+                </span>
+                <!--<a href="{:u('lists', [$category['name']])}" class="goback">返回列表</a>-->
+                <a href="javascript:history.back()" class="goback">返回列表</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!--正文end-->
+{view name="Base/footer"}

@@ -3,6 +3,7 @@
 namespace Home\Controller;
 
 use Top\Loader;
+use Vendor\Page;
 
 class Article extends Common {
 
@@ -33,7 +34,11 @@ class Article extends Common {
             $this->error($categoryModel->getError());
         }
         // 内容列表
-        $lists = $categoryModel->lists($category['id']);
+        $total = $categoryModel->lists($category['id'], false, false, true);
+        $page = new Page($category['list_row'], $total);
+        $order = 'level desc, create_time desc';
+        $lists = $categoryModel->lists($category['id'], $order, "$page->startNum, $page->listNum");
+        $this->params('page', $page->homeShow());
         $this->params('lists', $lists);
         $this->params('category', $category);
         $this->cache()->view($category['list_template']);
@@ -54,7 +59,7 @@ class Article extends Common {
         $article = Loader::get('\Home\Model\Article');
         $info = $article->getContent($category, $id);
         // 文章不存在处理
-        if($info === false) {
+        if ($info === false) {
             $this->error($article->getError());
         }
         // 当前所属分类配置的详情模板
@@ -64,5 +69,20 @@ class Article extends Common {
         $this->params('category', $categoryInfo);
         $this->params('info', $info);
         $this->cache()->view($template);
+    }
+
+    public function search($keywords = '', $category = '') {
+        $keywords = $this->filter($keywords);
+        $model = Loader::get('\Home\Model\Article');
+        $categorys = $model->getSearchCategogry();
+        if (!$category) $category = $categorys[0];
+        // $page = new Page(2, $model->search($keywords, $category, false, true));
+        $lists = $model->search($keywords, $category);
+        // $this->params('page', $page->show());
+        $this->params('category_id', $category);
+        $this->params('keywords', $keywords);
+        $this->params('categorys', $categorys);
+        $this->params('lists', $lists);
+        $this->view();
     }
 }

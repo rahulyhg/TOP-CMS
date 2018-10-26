@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author TOP糯米 <1130395124@qq.com> 2017
+ */
 
 namespace Vendor;
 
@@ -53,6 +56,29 @@ class Page {
             }
         }
         $html .= ($this->p < $this->totalPage) ? '<a class="next" href="' . u($uri_string . '/p/' . ($this->p + 1)) . '">&gt;&gt;</a>' : '';
+        return $html . '</div>';
+    }
+
+    /**
+     * 获取分页HTML
+     * @return string
+     * <div>  <span class="current">1</span><a class="num" href="#">2</a> <a class="next" href="#">&gt;&gt;</a> </div>
+     */
+    public function homeShow() {
+        $html = '<div>';
+        $uri_string = (isset($_GET['s'])) ? $_GET['s'] : u(DEFAULT_URL);
+        $m = [];
+        $uri_string = '/' . ltrim($uri_string, '/');
+        $pString = '&p=';
+        $html .= ($this->p != 1) ? '<a href="' . $uri_string . $pString . ($this->p - 1) . '" class="prev"><<</a>' : '';
+        for ($i = 0; $i < $this->totalPage; $i++) {
+            if ($this->p == ($i + 1)) {
+                $html .= '<span class="current">' . ($i + 1) . '</span>';
+            } else {
+                $html .= '<a href="' . $uri_string . $pString . ($i + 1) . '" class="num">' . ($i + 1) . '</a>';
+            }
+        }
+        $html .= ($this->p < $this->totalPage) ? '<a href="' . $uri_string . $pString . ($this->p + 1) . '" class="next">>></a>' : '';
         return $html . '</div>';
     }
 }

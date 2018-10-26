@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author TOP糯米 <1130395124@qq.com> 2017
+ */
 
 namespace Top;
 
@@ -10,7 +13,7 @@ use Top\Database\Driver\Mysqli;
  */
 class Model {
     private $db;
-    private $dbInstance;
+    private $instance;
     protected $table;
     protected $pk = 'id';
     protected $map = [];
@@ -22,6 +25,11 @@ class Model {
     private $order;
     private $limit;
 
+    /**
+     * Model constructor.
+     * @param string $table
+     * @throws \Exception
+     */
     public function __construct($table = '') {
         if ($table || $this->table) {
             $this->table = Config::get('db')['prefix'] . (($table) ? $table : $this->table);
@@ -53,6 +61,15 @@ class Model {
             foreach ($tableInfo as $value) {
                 //如果表字段不等于当前主键，并且映射后数组中存在以表字段为键名的值，则为$data赋值
                 if ($value['Field'] != $this->pk && isset($mapData[$value['Field']])) {
+                    if (!$mapData[$value['Field']]) {
+                        if ($value['Default']) {
+                            $mapData[$value['Field']] = $value['Default'];
+                        } else if (stristr($value['Type'], 'int')) {
+                            $mapData[$value['Field']] = 0;
+                        } else {
+                            $mapData[$value['Field']] = 'NULL';
+                        }
+                    }
                     //此处不做过滤
                     $data[$value['Field']] = $mapData[$value['Field']];
                 }
@@ -91,18 +108,12 @@ class Model {
     /**
      * 获取数据库实例
      * @return mixed
+     * @throws \Exception
      */
     public function connect() {
         $config = Config::get('db');
-        if (!isset($this->dbInstance[md5(serialize($config))])) {
-            switch ($config['type']) {
-                case 'Mysqli':
-                    $this->dbInstance[md5(serialize($config))] = new Mysqli($config['host'], $config['user'], $config['pwd'], $config['dbname'], $config['charset'], $config['prefix']);
-                    break;
-                //其他新增数据库......
-            }
-        }
-        return $this->dbInstance[md5(serialize($config))];
+        $object = Mysqli::getInstance($config['host'], $config['user'], $config['pwd'], $config['dbname'], $config['charset'], $config['prefix']);
+        return $object;
     }
 
     /**

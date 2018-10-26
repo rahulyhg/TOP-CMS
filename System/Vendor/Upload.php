@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author TOP糯米 <1130395124@qq.com> 2017
+ */
 
 namespace Vendor;
 
@@ -48,41 +51,16 @@ class Upload {
         if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
             $tempFile = $_FILES['Filedata']['tmp_name'];
             $type = getimagesize($tempFile)['mime'];
-            if ($type != 'image/gif') {
-                $image = @imagecreatefromstring(file_get_contents($tempFile));
-                if ($image) {
-                    $targetPath = $_SERVER['DOCUMENT_ROOT'] . self::$dirName;
-                    if (!is_dir($targetPath)) mkdir($targetPath, 0777, true);
-                    $targetFile = rtrim($targetPath, '/') . '/' . ((!$fileName) ? $_FILES['Filedata']['name'] : $fileName);
-                    $fileParts = pathinfo($_FILES['Filedata']['name']);
-                    $result = false;
-                    switch ($type) {
-                        case 'image/jpeg':
-                            $result = @imagejpeg($image, $targetFile . '.' . $fileParts['extension']);
-                            break;
-                        case 'image/png':
-                            $result = @imagepng($image, $targetFile . '.' . $fileParts['extension']);
-                            break;
-                    }
-                    if ($result) {
-                        return rtrim(self::$dirName, '/') . '/' . $fileName . '.' . $fileParts['extension'];
-                    } else {
-                        $this->error = 'error.';
-                        return false;
-                    }
-                }
-            } else if ($type == 'image/gif') { //gif图片单独上传，避免丢失帧
-                $targetPath = $_SERVER['DOCUMENT_ROOT'] . self::$dirName;
-                if (!is_dir($targetPath)) mkdir($targetPath, 0777, true);
-                $targetFile = rtrim($targetPath, '/') . '/' . ((!$fileName) ? $_FILES['Filedata']['name'] : $fileName);
-                $fileParts = pathinfo($_FILES['Filedata']['name']);
-                if (in_array($fileParts['extension'], self::$fileType)) {
-                    if (move_uploaded_file($tempFile, $targetFile . '.' . $fileParts['extension'])) {
-                        return rtrim(self::$dirName, '/') . '/' . $fileName . '.' . $fileParts['extension'];
-                    } else {
-                        $this->error = '上传失败';
-                        return false;
-                    }
+            $targetPath = self::$dirName;
+            if (!is_dir($targetPath)) mkdir($targetPath, 0777, true);
+            $targetFile = rtrim($targetPath, '/') . '/' . ((!$fileName) ? $_FILES['Filedata']['name'] : $fileName);
+            $fileParts = pathinfo($_FILES['Filedata']['name']);
+            if (in_array($fileParts['extension'], self::$fileType)) {
+                if (move_uploaded_file($tempFile, $targetFile . '.' . $fileParts['extension'])) {
+                    return rtrim(self::$dirName, '/') . '/' . $fileName . '.' . $fileParts['extension'];
+                } else {
+                    $this->error = '上传失败';
+                    return false;
                 }
             }
             $this->error = '文件类型不被允许';
@@ -93,7 +71,7 @@ class Upload {
     public function uploadFile($fileName = '') {
         $tempFile = $_FILES['Filedata']['tmp_name'];
         $fileParts = pathinfo($_FILES['Filedata']['name']);
-        $targetPath = $_SERVER['DOCUMENT_ROOT'] . self::$dirName;
+        $targetPath = self::$dirName;
         if (!is_dir($targetPath)) mkdir($targetPath, 0777, true);
         $targetFile = rtrim($targetPath, '/') . '/' . ((!$fileName) ? $_FILES['Filedata']['name'] : $fileName);
         if (in_array($fileParts['extension'], self::$fileType)) {

@@ -63,11 +63,9 @@ class Rule extends Model {
                 $uriName = $name;
                 if (class_exists($className)) {
                     $methods = get_class_methods($className);
-                    $k = 0;
                     for ($j = 0; $j < count($methods); $j++) {
                         if (!in_array($methods[$j], $filterList)) {
-                            $lists[$uriName][$k] = $uriName . URL_DELIMIT . $methods[$j];
-                            $k++;
+                            $lists[$uriName][$j] = $uriName . URL_DELIMIT . $methods[$j];
                         }
                     }
                 }
@@ -90,6 +88,7 @@ class Rule extends Model {
             if ($number > 0) {
                 $pid = $this->field('id')->where(['action' => $key])->find()['id'];
             }
+            $value = array_merge($value, []);
             for ($i = 0; $i < count($value); $i++) {
                 if ($this->where(['action' => $value[$i]])->count() == 0) {
                     $name = '';

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author TOP糯米 <1130395124@qq.com> 2017
+ */
 
 namespace Top\Database\Driver;
 
@@ -7,6 +10,7 @@ namespace Top\Database\Driver;
  * @author TOP糯米
  */
 class Mysqli {
+    private static $instance;
     private $link;
     private $prefix;
     private $sql;
@@ -21,7 +25,7 @@ class Mysqli {
      * @param $prefix
      * @throws \Exception
      */
-    public function __construct($host, $user, $pwd, $dbname, $charset, $prefix) {
+    private function __construct($host, $user, $pwd, $dbname, $charset, $prefix) {
         $this->link = @mysqli_connect($host, $user, $pwd, $dbname);
         if ($this->link === false) {
             echo '<pre />';
@@ -29,6 +33,22 @@ class Mysqli {
         }
         mysqli_query($this->link, 'set names ' . $charset);
         $this->prefix = $prefix;
+    }
+
+    /**
+     * @param $host
+     * @param $user
+     * @param $pwd
+     * @param $dbname
+     * @param $charset
+     * @param $prefix
+     * @throws \Exception
+     */
+    public static function getInstance($host, $user, $pwd, $dbname, $charset, $prefix) {
+        if (!self::$instance) {
+            self::$instance = new self($host, $user, $pwd, $dbname, $charset, $prefix);
+        }
+        return self::$instance;
     }
 
     /**
@@ -319,7 +339,11 @@ class Mysqli {
         $dot = ',';
         $d = '\'';
         for ($i = 0; $i < count($keys); $i++) {
-            $str .= (($i == 0) ? '' : $dot) . '`' . $keys[$i] . '`' . '=' . ((is_array($vals[$i])) ? '' : $d) . ((is_array($vals[$i])) ? $vals[$i][0] : $vals[$i]) . ((is_array($vals[$i])) ? '' : $d);
+            if (is_numeric($vals[$i]) || strtolower($vals[$i]) == 'null') {
+                $d = '';
+            }
+            $str .= (($i == 0) ? '' : $dot) . '`' . $keys[$i] . '`' . '=' . $d . $vals[$i] . $d;
+            $d = '\'';
         }
         return $str;
     }
@@ -332,7 +356,17 @@ class Mysqli {
     public function addData($data) {
         $arr = [];
         $arr[0] = '`' . join('`,`', array_keys($data)) . '`';
-        $arr[1] = '\'' . join('\',\'', array_values($data)) . '\'';
+        $vals = array_values($data);
+        $string = '';
+        $dot = '\'';
+        for ($i = 0; $i < count($vals); $i++) {
+            if (is_numeric($vals[$i]) || strtolower($vals[$i]) == 'null') {
+                $dot = '';
+            }
+            $string .= (($i == 0) ? '' : ',') . $dot . $vals[$i] . $dot;
+            $dot = '\'';
+        }
+        $arr[1] = $string;
         return $arr;
     }
 

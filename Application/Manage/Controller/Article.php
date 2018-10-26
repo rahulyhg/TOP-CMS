@@ -40,7 +40,7 @@ class Article extends Manage {
             }
             $this->showJson($article->getError());
         } else {
-            $info = $article->getContentById($categoryId, $id);
+            $info = $article->getArticle($categoryId, ['id' => $id]);
             $fieldList = $article->getFieldByCategoryId($categoryId);
             $this->params('field', $fieldList);
             $this->params('category_id', $categoryId);

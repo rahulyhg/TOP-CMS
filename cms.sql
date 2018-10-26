@@ -4,16 +4,37 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50553
 Source Host           : localhost:3306
-Source Database       : yjsg
+Source Database       : zlj
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-10-17 22:44:01
+Date: 2018-10-26 14:53:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `cms_banner`
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_banner`;
+CREATE TABLE `cms_banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `detail_template` char(32) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL COMMENT '优先级',
+  `image_id` int(11) DEFAULT '0' COMMENT '图片',
+  `url` char(255) DEFAULT NULL COMMENT '链接',
+  `new_window` int(11) DEFAULT '0' COMMENT '新窗口',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cms_banner
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `cms_category`
@@ -22,19 +43,22 @@ DROP TABLE IF EXISTS `cms_category`;
 CREATE TABLE `cms_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT '0',
+  `channel_id` int(11) DEFAULT '0',
   `title` char(72) DEFAULT NULL,
   `name` char(32) DEFAULT NULL,
   `create_content` tinyint(1) DEFAULT '1',
   `model_id` int(11) DEFAULT '0',
+  `list_row` int(11) DEFAULT '10',
   `craete_time` int(11) DEFAULT '0',
   `action` char(32) DEFAULT 'Article/lists',
   `index_template` char(32) DEFAULT NULL,
   `list_template` char(32) DEFAULT NULL,
   `detail_template` char(32) DEFAULT NULL,
   `sort` int(11) DEFAULT '0',
+  `icon` int(11) DEFAULT '0',
   `status` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_category
@@ -72,16 +96,41 @@ CREATE TABLE `cms_config` (
   `create_time` int(11) DEFAULT '0',
   `sort` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_config
 -- ----------------------------
-INSERT INTO `cms_config` VALUES ('2', '1', 'SITE_KEYWORDS', '站点关键词', '', '3', '', '1538097177', '2');
-INSERT INTO `cms_config` VALUES ('3', '1', 'SITE_DESCRIPTION', '站点描述', '', '3', '', '1538097318', '3');
-INSERT INTO `cms_config` VALUES ('4', '3', 'MANAGE_NAME', '管理后台名称', '', '1', 'TOP-CMS', '1538097412', '0');
-INSERT INTO `cms_config` VALUES ('5', '1', 'SITE_TITLE', '站点标题', '', '1', '', '1538390034', '1');
-INSERT INTO `cms_config` VALUES ('6', '1', 'FOOTER_TEXT', '网站底部文字', '', '3', 'Powered by TOP糯米', '1538404086', '4');
+INSERT INTO `cms_config` VALUES ('2', '1', 'SITE_KEYWORDS', '站点关键词', null, '3', null, '1538097177', '2');
+INSERT INTO `cms_config` VALUES ('3', '1', 'SITE_DESCRIPTION', '站点描述', null, '3', null, '1538097318', '3');
+INSERT INTO `cms_config` VALUES ('4', '3', 'MANAGE_NAME', '管理后台名称', null, '1', 'TOP-CMS', '1538097412', '0');
+INSERT INTO `cms_config` VALUES ('5', '1', 'SITE_TITLE', '站点标题', null, '1', null, '1538390034', '1');
+INSERT INTO `cms_config` VALUES ('6', '1', 'FOOTER_TEXT', '系统底部文字', null, '3', 'Powered by TOP糯米', '1538404086', '5');
+INSERT INTO `cms_config` VALUES ('11', '1', 'SEARCH_CATEGORY', '允许搜索的分类', null, '3', null, '1540177115', '4');
+INSERT INTO `cms_config` VALUES ('12', '1', 'SITE_LOGO', '网站LOGO', null, '3', null, '1540263835', '6');
+
+-- ----------------------------
+-- Table structure for `cms_document`
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_document`;
+CREATE TABLE `cms_document` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `detail_template` char(32) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL COMMENT '优先级',
+  `title` char(128) DEFAULT NULL COMMENT '标题',
+  `description` text COMMENT '描述',
+  `cover` int(11) DEFAULT NULL COMMENT '封面',
+  `content` longtext COMMENT '内容',
+  `second_title` char(128) DEFAULT NULL COMMENT '副标题',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cms_document
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `cms_files`
@@ -111,7 +160,7 @@ CREATE TABLE `cms_menu` (
   `display` tinyint(1) DEFAULT '1',
   `sort` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_menu
@@ -122,12 +171,13 @@ INSERT INTO `cms_menu` VALUES ('3', '2', '菜单管理', 'Menu', '1', '3');
 INSERT INTO `cms_menu` VALUES ('4', '2', '配置管理', 'Config', '1', '6');
 INSERT INTO `cms_menu` VALUES ('5', '2', '分类管理', 'Category', '1', '2');
 INSERT INTO `cms_menu` VALUES ('6', '2', '导航管理', 'Channel', '1', '1');
-INSERT INTO `cms_menu` VALUES ('7', '1', '用户列表', 'Users', '1', '0');
+INSERT INTO `cms_menu` VALUES ('7', '1', '会员列表', 'Users', '1', '0');
 INSERT INTO `cms_menu` VALUES ('8', '0', '内容管理', '/', '1', '1');
 INSERT INTO `cms_menu` VALUES ('9', '2', '模型管理', 'Model', '1', '4');
 INSERT INTO `cms_menu` VALUES ('10', '8', '内容管理', 'Article', '1', '1');
 INSERT INTO `cms_menu` VALUES ('12', '1', '角色管理', 'Group', '1', '1');
 INSERT INTO `cms_menu` VALUES ('13', '2', '权限列表', 'Rule', '1', '5');
+INSERT INTO `cms_menu` VALUES ('20', '8', '附件管理', 'Files', '1', '2');
 
 -- ----------------------------
 -- Table structure for `cms_model`
@@ -142,11 +192,14 @@ CREATE TABLE `cms_model` (
   `sort` int(11) DEFAULT '0',
   `list_display` char(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_model
 -- ----------------------------
+INSERT INTO `cms_model` VALUES ('1', 'banner', '首页banner', 'MyISAM', '1540279688', '0', '');
+INSERT INTO `cms_model` VALUES ('3', 'document', '通用文档', 'MyISAM', '1540286640', '0', null);
+INSERT INTO `cms_model` VALUES ('8', 'words', '留言', 'MyISAM', '1540369391', '0', '');
 
 -- ----------------------------
 -- Table structure for `cms_model_field`
@@ -166,11 +219,29 @@ CREATE TABLE `cms_model_field` (
   `sort` int(11) DEFAULT '0',
   `list_display` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_model_field
 -- ----------------------------
+INSERT INTO `cms_model_field` VALUES ('1', '1', 'detail_template', '详情模板', 'char(32)', '1', '详情模板', null, '1', null, '10', '0');
+INSERT INTO `cms_model_field` VALUES ('2', '1', 'level', '优先级', 'int', '2', '越大越靠前', null, '1', null, '10', '1');
+INSERT INTO `cms_model_field` VALUES ('3', '1', 'image_id', '图片', 'int', '7', '', '', '1', '0', '0', '1');
+INSERT INTO `cms_model_field` VALUES ('4', '1', 'url', '链接', 'char(255)', '5', '点击跳转链接', '', '1', '', '0', '1');
+INSERT INTO `cms_model_field` VALUES ('5', '1', 'new_window', '新窗口', 'int', '4', '', '1:是\n0:否', '1', '0', '0', '0');
+INSERT INTO `cms_model_field` VALUES ('21', '3', 'detail_template', '详情模板', 'char(32)', '1', '详情模板', null, '1', null, '10', '0');
+INSERT INTO `cms_model_field` VALUES ('22', '3', 'level', '优先级', 'int', '2', '越大越靠前', null, '1', null, '10', '1');
+INSERT INTO `cms_model_field` VALUES ('23', '3', 'title', '标题', 'char(128)', '1', '文档标题', '', '1', '', '0', '1');
+INSERT INTO `cms_model_field` VALUES ('24', '3', 'description', '描述', 'text', '5', '文档描述', '', '1', '', '3', '0');
+INSERT INTO `cms_model_field` VALUES ('25', '3', 'cover', '封面', 'int', '7', '文档封面', '', '1', '', '2', '1');
+INSERT INTO `cms_model_field` VALUES ('26', '3', 'content', '内容', 'longtext', '6', '', '', '1', '', '4', '0');
+INSERT INTO `cms_model_field` VALUES ('27', '3', 'second_title', '副标题', 'char(128)', '1', '', '', '1', '', '1', '0');
+INSERT INTO `cms_model_field` VALUES ('55', '8', 'detail_template', '详情模板', 'char(32)', '1', '详情模板', null, '1', null, '10', '0');
+INSERT INTO `cms_model_field` VALUES ('56', '8', 'level', '优先级', 'int', '2', '越大越靠前', null, '1', null, '10', '1');
+INSERT INTO `cms_model_field` VALUES ('57', '8', 'name', '姓名', 'char(128)', '1', '', '', '0', '', '0', '1');
+INSERT INTO `cms_model_field` VALUES ('58', '8', 'mobile', '联系电话', 'char(11)', '1', '', '', '0', '', '0', '1');
+INSERT INTO `cms_model_field` VALUES ('59', '8', 'email', '联系邮箱', 'char(128)', '1', '', '', '0', '', '0', '1');
+INSERT INTO `cms_model_field` VALUES ('60', '8', 'content', '留言内容', 'longtext', '6', '', '', '1', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `cms_users`
@@ -194,8 +265,8 @@ CREATE TABLE `cms_users` (
 -- ----------------------------
 -- Records of cms_users
 -- ----------------------------
-INSERT INTO `cms_users` VALUES ('10', '4', 'TOP糯米', '9028b333dfc153cee8d61552716c5885', '12e767', '1539306303', '192.168.0.200', '1539776069', '127.0.0.1', '0', '1');
-INSERT INTO `cms_users` VALUES ('11', '5', 'demo', '0173b07fc69d94ab3babcc59a0e55967', '62bca3', '1539306314', '192.168.0.200', '1539582598', '118.123.42.169', '100', '1');
+INSERT INTO `cms_users` VALUES ('10', '4', 'admin', '010267c03d93bc53d451bf975917f114', '645223', '1539306303', '192.168.0.200', '1540532456', '118.123.41.91', '0', '1');
+INSERT INTO `cms_users` VALUES ('11', '5', 'demo', '0173b07fc69d94ab3babcc59a0e55967', '62bca3', '1539306314', '192.168.0.200', '1540436336', '118.123.41.91', '100', '1');
 
 -- ----------------------------
 -- Table structure for `cms_users_group`
@@ -213,8 +284,8 @@ CREATE TABLE `cms_users_group` (
 -- ----------------------------
 -- Records of cms_users_group
 -- ----------------------------
-INSERT INTO `cms_users_group` VALUES ('4', '超级管理员', '我是权力最大的分组', '137,138,139,140,141,143,144,145,146,148,149,150,151,153,154,155,156,158,159,160,161,163,164,165,166,194,168,169,170,172,173,174,175,177,178,179,180,182,183,184,185,191,187,188,189,195,198,199', '1');
-INSERT INTO `cms_users_group` VALUES ('5', '演示组', '演示', '137,138,143,148,153,158,163,168,169,170,172,177,182,187', '1');
+INSERT INTO `cms_users_group` VALUES ('4', '超级管理员', '我是权力最大的分组', '137,138,139,140,141,143,144,145,146,148,149,150,151,153,154,155,156,158,159,160,161,163,164,165,166,194,168,169,170,172,173,174,175,177,178,179,180,182,183,184,185,191,187,188,189,195,198,199,201,205,206,207', '1');
+INSERT INTO `cms_users_group` VALUES ('5', '演示组', '演示', '137,138,143,148,153,158,163,168,169,170,172,177,182,187,201,205', '1');
 
 -- ----------------------------
 -- Table structure for `cms_users_rule`
@@ -226,7 +297,7 @@ CREATE TABLE `cms_users_rule` (
   `action` char(255) NOT NULL,
   `name` char(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_users_rule
@@ -291,3 +362,30 @@ INSERT INTO `cms_users_rule` VALUES ('195', '186', 'Users/delete', '删除用户
 INSERT INTO `cms_users_rule` VALUES ('197', '0', 'Upload', '上传操作');
 INSERT INTO `cms_users_rule` VALUES ('198', '197', 'Upload/uploadfive', '上传图片');
 INSERT INTO `cms_users_rule` VALUES ('199', '197', 'Upload/uploadfiveFile', '上传附件');
+INSERT INTO `cms_users_rule` VALUES ('200', '0', 'Other', '其他');
+INSERT INTO `cms_users_rule` VALUES ('204', '0', 'Files', '附件管理');
+INSERT INTO `cms_users_rule` VALUES ('205', '204', 'Files/index', '附件列表');
+INSERT INTO `cms_users_rule` VALUES ('206', '204', 'Files/add', '新增文件');
+INSERT INTO `cms_users_rule` VALUES ('207', '204', 'Files/delete', '删除文件');
+
+-- ----------------------------
+-- Table structure for `cms_words`
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_words`;
+CREATE TABLE `cms_words` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `detail_template` char(32) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL COMMENT '优先级',
+  `name` char(128) NOT NULL COMMENT '姓名',
+  `mobile` char(11) NOT NULL COMMENT '联系电话',
+  `email` char(128) NOT NULL COMMENT '联系邮箱',
+  `content` longtext COMMENT '留言内容',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cms_words
+-- ----------------------------

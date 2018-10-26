@@ -143,7 +143,8 @@ EOF;
     }
 
     public function checkTableExists($tableName) {
-        $result = $this->query("SELECT table_name FROM information_schema.TABLES WHERE table_name ='$tableName'");
+        $dbname = \Top\Config::get('db')['dbname'];
+        $result = $this->query("SELECT table_name FROM information_schema.TABLES WHERE table_name ='$tableName' and table_schema = '$dbname'");
         if ($result->num_rows > 0) {
             return true;
         }

@@ -13,15 +13,19 @@ class Category extends Model {
     public function category($category = '') {
         $category = (!$category) ? $this->filter($_GET['category']) : $category;
         $model = Loader::get('\Manage\Model\Category');
-        $info = $model->getCategoryByName($category);
-        if(!empty($info)) {
+        if (is_numeric($category)) {
+            $info = $model->getCategoryById((int)$category);
+        } else {
+            $info = $model->getCategoryByName($category);
+        }
+        if (!empty($info)) {
             return $info;
         }
         $this->error = '分类不存在';
         return false;
     }
 
-    public function lists($categoryId, $order = 'create_time desc', $limit = false, $count = false) {
+    public function lists($categoryId, $order = 'level desc, create_time desc', $limit = false, $count = false) {
         $model = Loader::get('\Manage\Model\Article');
         $lists = $model->getContentListByCategoryId($categoryId, $order, $limit, $count);
         return $lists;

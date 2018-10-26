@@ -9,6 +9,7 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
+    <blockquote class="layui-elem-quote">部分安全软件可能会拦截此操作，使用出现异常。如果失败，请手动操作数据库</blockquote>
     <xblock>
         <a class="layui-btn layui-btn-primary" href="{:u('/Manage/Model')}">返回</a>
         <button class="layui-btn" onclick="x_admin_show('添加字段', '{:u('/Manage/Field/add/mid/' . $mid)}')"><i class="layui-icon"></i>添加</button>
@@ -24,6 +25,7 @@
             <th>帮助</th>
             <th>允许为空</th>
             <th>默认值</th>
+            <th>列表显示</th>
             <th>排序</th>
             <th>操作</th>
         </tr>
@@ -38,6 +40,7 @@
             <td>{$vo['notice']}</td>
             <td>{if $vo['is_null'] == 1}是{else /}否{/if}</td>
             <td>{$vo['default_value']}</td>
+            <td>{if $vo['list_display']}是{else /}否{/if}</td>
             <td>{$vo['sort']}</td>
             <td class="td-manage">
                 <a title="编辑" class="layui-btn layui-btn-warm layui-btn-xs" onclick="x_admin_show('编辑','{:u('/Manage/Field/edit/id/' . $vo['id'])}')" href="javascript:;"><i class="layui-icon">&#xe642;</i>编辑</a>

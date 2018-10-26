@@ -9,7 +9,20 @@
                 <select name="pid">
                     <option value="0">顶级分类</option>
                     {loop $list as $vo}
-                        <option value="{$vo['id']}" {if $pid == $vo['id']}selected{/if}>{$vo['space']}{$vo['title']}</option>
+                    <option value="{$vo['id']}" {if $pid == $vo['id']}selected{/if}>{$vo['space']}{$vo['title']}</option>
+                    {/loop}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                关联导航
+            </label>
+            <div class="layui-input-inline">
+                <select name="channel_id">
+                    <option value="0">无</option>
+                    {loop $channel as $vo}
+                        <option value="{$vo['id']}">{$vo['name']}</option>
                     {/loop}
                 </select>
             </div>
@@ -65,6 +78,17 @@
         </div>
         <div class="layui-form-item">
             <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>列表行数
+            </label>
+            <div class="layui-input-inline">
+                <input type="number" id="list_row" name="list_row" required="" value="10" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>列表行数,超过开始分页
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
                 <span class="x-red">*</span>展示方式
             </label>
             <div class="layui-input-inline">
@@ -115,10 +139,21 @@
                 排序
             </label>
             <div class="layui-input-inline">
-                <input type="number" id="sort" name="sort" required="" autocomplete="off" class="layui-input">
+                <input type="number" id="sort" name="sort" required="" value="0" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 数字越小越靠前
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                图标
+            </label>
+            <div class="layui-input-inline">
+                {:addons('Uploadfive', ['name' => 'icon', 'value' => 0, 'path' => ''])}
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                分类图标
             </div>
         </div>
         <div class="layui-form-item">

@@ -1,0 +1,32 @@
+{view name="Base/header"}
+<div class="touch_bg">&nbsp;</div>
+<!-- E touch-top-wrapper -->
+<div class="blank_h">&nbsp;</div>
+<!--正文begin-->
+<div class="about_bg3">
+    <div class="about_t3  anim anim-1">{$category['title']}</div>
+    <div class="news_ul anim anim-2">
+        <ul>
+            {loop $lists as $value}
+                <li>
+                    <a href="{:u('detail', [$category['name'], $value['id']])}" title="">
+                        <div class="imgs {if $i%2==0}r{else /}l{/if}"><img src="{:\Manage\Helper::getFile($value['cover'])['path']}"/></div>
+                        <div class="news_box">
+                            <div class="news_txt">
+                                <em>{:date('Y-m-d', $value['create_time'])}</em>
+                                <h2>{$value['title']}</h2>
+                                <p>{$value['description']}</p>
+                                <label>查看详情</label>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            {/loop}
+        </ul>
+    </div>
+    <div class="pages yema">
+        {$page}
+    </div>
+</div>
+<!--正文end-->
+{view name="Base/footer"}

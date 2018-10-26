@@ -25,7 +25,9 @@
             <th width="50">ID</th>
             {loop $field as $k => $v}
                 {if $v['list_display'] == 1}
-                    <th>{$v['field_zhname']}</th>
+                    <th>
+                        {$v['field_zhname']}
+                    </th>
                 {/if}
             {/loop}
             <th>发布时间</th>
@@ -40,7 +42,13 @@
                 <td>{$vo['id']}</td>
                 {loop $field as $k => $v}
                     {if $v['list_display'] == 1}
-                        <td>{$vo[$v['field_name']]}</td>
+                        <td>
+                            {if $v['type'] == 7}
+                                <img src="{:\Manage\Helper::getFile($vo[$v['field_name']])['path']}" alt="">
+                            {else /}
+                                {$vo[$v['field_name']]}
+                            {/if}
+                        </td>
                     {/if}
                 {/loop}
                 <td>{:date('Y-m-d H:i:s', $vo['create_time'])}</td>

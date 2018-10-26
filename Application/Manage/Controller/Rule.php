@@ -53,7 +53,7 @@ class Rule extends Manage {
     public function updateRule() {
         $model = Loader::get('\Manage\Model\Rule');
         if ($model->updateRuleLists()) {
-            $this->showJson('更新成功', 1);
+            $this->showJson('更新权限列表成功', 1);
         }
         $this->showJson('更新失败');
     }

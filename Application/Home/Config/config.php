@@ -4,7 +4,7 @@ return [
     'session' => true,
     'db' => [
         'type' => 'Mysqli',
-        'host' => '127.0.0.1',
+        'host' => '',
         'dbname' => '',
         'user' => '',
         'pwd' => '',

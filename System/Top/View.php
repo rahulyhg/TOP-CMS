@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author TOP糯米 <1130395124@qq.com> 2017
+ */
 
 namespace Top;
 
@@ -11,17 +14,6 @@ class View {
     private static $params = [];
 
     private function __construct() {
-    }
-
-    /**
-     * 获取当前类实例（改用静态方法，此方法暂停使用）
-     * @return \Top\View
-     */
-    public static function getInstance() {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
     }
 
     /**

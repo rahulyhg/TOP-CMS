@@ -17,16 +17,16 @@
                     <a href="javascript:;">{$user_auth['name']}</a>
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
-                        <dd>
+                        <!--<dd>
                             <a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a>
-                        </dd>
+                        </dd>-->
                         <dd>
                             <a href="{:u('Manage/Auth/logout')}">退出</a>
                         </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item to-index">
-                    <a href="/" target="_blank">前台首页</a>
+                    <a href="{:u('Home/Index/index')}" target="_blank">前台首页</a>
                 </li>
             </ul>
 

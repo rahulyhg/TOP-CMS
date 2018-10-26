@@ -22,7 +22,7 @@ class Upload extends Manage {
 
     public function uploadfiveFile() {
         $uploadDir = './Uploads/files/' . date('Y/m/d') . '/';
-        $upload = \Vendor\Upload::init($uploadDir, ['zip']);
+        $upload = \Vendor\Upload::init($uploadDir, ['zip', 'png', 'jpg', 'gif']);
         $filename = $upload->uploadFile(uniqid());
         if ($filename) {
             $picture = Loader::get('\Manage\Model\Files');

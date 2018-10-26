@@ -23,6 +23,8 @@ class Category extends Manage {
             }
             $this->showJson($model->getError());
         } else {
+            $channelModel = Loader::get('\Manage\Model\Channel');
+            $this->params('channel', $channelModel->lists(['pid' => 0]));
             $list = $model->getTree();
             $modelObject = Loader::get('\Manage\Model\ContentModel');
             $this->params('list', $list);
@@ -41,6 +43,8 @@ class Category extends Manage {
             }
             $this->showJson($model->getError());
         } else {
+            $channelModel = Loader::get('\Manage\Model\Channel');
+            $this->params('channel', $channelModel->lists(['pid' => 0]));
             $info = $model->getCategoryById($id);
             $list = $model->getTree();
             $modelObject = Loader::get('\Manage\Model\ContentModel');

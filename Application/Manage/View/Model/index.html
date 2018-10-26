@@ -17,6 +17,7 @@
     <table class="layui-table">
         <thead>
         <tr>
+            <th>ID</th>
             <th>模型名称</th>
             <th>数据表名</th>
             <th>存储引擎</th>
@@ -28,6 +29,7 @@
         <tbody>
         {loop $list as $vo}
             <tr>
+                <td>{$vo['id']}</td>
                 <td>{$vo['model_name']}</td>
                 <td>{$vo['model_table']}</td>
                 <td>{$vo['model_engine']}</td>

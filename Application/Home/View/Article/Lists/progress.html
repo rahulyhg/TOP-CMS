@@ -1,0 +1,33 @@
+{view name="Base/header"}
+
+<div class="touch_bg">&nbsp;</div>
+<!-- E touch-top-wrapper -->
+<div class="blank_h">&nbsp;</div>
+<!--正文begin-->
+<div class="about_bg2" style="background: url(/Resource/Home/images/5927f9856b18d.jpg) center top no-repeat;">
+    <div class="about_con anim anim-1">
+        <ul class="about_ul">
+            {loop $lists as $value}
+                <li>
+                    <em>{$value['title']}</em>
+                    <h2>{$value['second_title']}</h2><p>{$value['content']}...</p>
+                </li>
+            {/loop}
+        </ul>
+    </div>
+</div>
+<!--正文end-->
+
+<!--尾部begin-->
+<script>
+    $(function() {
+        var aboutHeight = $('.about_ul').height();
+        if(aboutHeight > 600) {
+            $('.about_ul').css({
+                'height': '600px',
+                'overflow-y': 'scroll'
+            });
+        }
+    });
+</script>
+{view name="Base/footer"}
