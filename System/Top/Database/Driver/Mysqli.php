@@ -69,7 +69,8 @@ class Mysqli {
         $limit = $this->limit($limit);
         $this->sql = 'select ' . $filed . ' from ' . $table . $tables . $where . $order . $limit;
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         $data = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -95,7 +96,8 @@ class Mysqli {
         $limit = $this->limit(1);
         $this->sql = 'select ' . $filed . ' from ' . $table . $tables . $where . $order . $limit;
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         return mysqli_fetch_assoc($result);
     }
@@ -111,7 +113,8 @@ class Mysqli {
         $data = $this->addData($data);
         $this->sql = 'insert into ' . $table . '(' . $data[0] . ') values(' . $data[1] . ')';
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         if ($result) {
             return mysqli_insert_id($this->link);
@@ -133,7 +136,8 @@ class Mysqli {
         $data = $this->updateData($data);
         $this->sql = 'update ' . $table . ' set ' . $data . $where;
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         if ($result) {
             return mysqli_affected_rows($this->link);
@@ -157,7 +161,8 @@ class Mysqli {
         $limit = $this->limit($limit);
         $this->sql = 'delete from ' . $table . $tables . $where . $order . $limit;
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
 
         if ($result) {
@@ -184,7 +189,8 @@ class Mysqli {
         $limit = $this->limit($limit);
         $this->sql = 'select count(' . $filed . ') from ' . $table . $tables . $where . $order . $limit;
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         $row = mysqli_fetch_array($result);
         return $row[0];
@@ -205,7 +211,8 @@ class Mysqli {
         $where = $this->where($where, ($tables) ? true : false);
         $this->sql = 'select sum(' . $filed . ') from ' . $table . $tables . $where;
         if (!$result = mysqli_query($this->link, $this->sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         $row = mysqli_fetch_array($result);
         return $row[0];
@@ -220,7 +227,8 @@ class Mysqli {
     public function tableDesc($table) {
         $sql = 'desc ' . $table;
         if (!$result = mysqli_query($this->link, $sql)) {
-            throw new \Exception(mysqli_error($this->link));
+            // throw new \Exception(mysqli_error($this->link));
+            return false;
         }
         $data = [];
         while ($row = mysqli_fetch_assoc($result)) {

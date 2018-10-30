@@ -56,21 +56,12 @@ class Model {
         //初始化$data
         $data = [];
         if ($this->table) {
-            $tableInfo = $this->getTableDesc();
+            $tableInfo = $this->getTableDesc($this->table);
             $mapData = $this->processMap($this->map);
             foreach ($tableInfo as $value) {
-                //如果表字段不等于当前主键，并且映射后数组中存在以表字段为键名的值，则为$data赋值
+                // 如果表字段不等于当前主键，并且映射后数组中存在以表字段为键名的值，则为$data赋值
                 if ($value['Field'] != $this->pk && isset($mapData[$value['Field']])) {
-                    if ($mapData[$value['Field']] === '') {
-                        if ($value['Default']) {
-                            $mapData[$value['Field']] = $value['Default'];
-                        } else if (stristr($value['Type'], 'int')) {
-                            $mapData[$value['Field']] = 0;
-                        } else {
-                            $mapData[$value['Field']] = 'NULL';
-                        }
-                    }
-                    //此处不做过滤
+                    // 此处不做过滤
                     $data[$value['Field']] = $mapData[$value['Field']];
                 }
             }
@@ -88,17 +79,38 @@ class Model {
         $mapData = $_POST;
         //遍历POST过来的数据
         foreach ($mapData as $key => $value) {
-            //遍历数据库字段
+            // 遍历数据库字段
             foreach ($map as $k => $v) {
                 if ($key == $k) {
                     // 删除原有键名
                     unset($mapData[$k]);
-                    //添加数据库字段为键名并赋值
+                    // 添加数据库字段为键名并赋值
                     $mapData[$v] = $value;
                 }
             }
         }
         return $mapData;
+    }
+
+    /**
+     * 入库前做最后的数据处理
+     * @param $processData
+     * @return mixed
+     */
+    private function processData($processData) {
+        $tableInfo = $this->getTableDesc($this->table);
+        foreach ($tableInfo as $value) {
+            if (isset($processData[$value['Field']]) && $processData[$value['Field']] === '') {
+                if ($value['Default']) {
+                    $processData[$value['Field']] = $value['Default'];
+                } else if (stristr($value['Type'], 'int')) {
+                    $processData[$value['Field']] = 0;
+                } else {
+                    $processData[$value['Field']] = 'NULL';
+                }
+            }
+        }
+        return $processData;
     }
 
     public function filter($str) {
@@ -219,6 +231,7 @@ class Model {
      * @return mixed
      */
     public function insert($data) {
+        $data = $this->processData($data);
         $result = $this->db->insert($this->table, $data);
         return $result;
     }
@@ -234,6 +247,7 @@ class Model {
             $this->where = [];
             $this->where[$this->pk] = $pkValue;
         }
+        $data = $this->processData($data);
         $result = $this->db->update($this->table, $this->where, $data);
         $this->_clean();
         return $result;
@@ -272,9 +286,8 @@ class Model {
      * 获取表结构
      * @return mixed
      */
-    public function getTableDesc() {
-        $result = $this->db->tableDesc($this->table);
-        $this->_clean();
+    public function getTableDesc($table) {
+        $result = $this->db->tableDesc($table);
         return $result;
     }
 

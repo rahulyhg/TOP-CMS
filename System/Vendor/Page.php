@@ -62,23 +62,28 @@ class Page {
     /**
      * 获取分页HTML
      * @return string
-     * <div>  <span class="current">1</span><a class="num" href="#">2</a> <a class="next" href="#">&gt;&gt;</a> </div>
+     * <div class='met_pager'>
+    <span class='PreSpan'>上一页</span>
+    <a class="Ahover">1</a>
+    <a href='list_19_2.html'>2</a>
+    <a href='list_19_2.html'>下一页</a>
+    </div>
      */
     public function homeShow() {
-        $html = '<div>';
+        $html = '<div class=\'met_pager\'>';
         $uri_string = (isset($_GET['s'])) ? $_GET['s'] : u(DEFAULT_URL);
         $m = [];
         $uri_string = '/' . ltrim($uri_string, '/');
         $pString = '&p=';
-        $html .= ($this->p != 1) ? '<a href="' . $uri_string . $pString . ($this->p - 1) . '" class="prev"><<</a>' : '';
+        $html .= ($this->p != 1) ? '<a href="' . $uri_string . $pString . ($this->p - 1) . '">上一页</a>' : '';
         for ($i = 0; $i < $this->totalPage; $i++) {
             if ($this->p == ($i + 1)) {
-                $html .= '<span class="current">' . ($i + 1) . '</span>';
+                $html .= '<a class="Ahover">' . ($i + 1) . '</a>';
             } else {
-                $html .= '<a href="' . $uri_string . $pString . ($i + 1) . '" class="num">' . ($i + 1) . '</a>';
+                $html .= '<a href="' . $uri_string . $pString . ($i + 1) . '"' . ($i + 1) . '</a>';
             }
         }
-        $html .= ($this->p < $this->totalPage) ? '<a href="' . $uri_string . $pString . ($this->p + 1) . '" class="next">>></a>' : '';
+        $html .= ($this->p < $this->totalPage) ? '<a href="' . $uri_string . $pString . ($this->p + 1) . '">下一页</a>' : '';
         return $html . '</div>';
     }
 }
