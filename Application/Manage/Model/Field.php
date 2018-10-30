@@ -34,11 +34,19 @@ class Field extends Model {
             $data = $this->getData();
             $data['model_id'] = $mid;
             $notNull = ($data['is_null']) ? '' : 'NOT NULL';
-            $defaultValue = ($data['default_value'] !== '') ? "DEFAULT '{$data['default_value']}'" : '';
+            if (strtolower($data['default_value']) == 'null') {
+                $default = 'NULL';
+            } else {
+                $default = ((is_numeric($data['default_value'])) ? $data['default_value'] : '\'' . $data['default_value'] . '\'');
+            }
+            $defaultValue = (!$data['is_null'] && $default == 'NULL') ? '' : (($data['default_value'] !== '') ? "DEFAULT " . $default : '');
             $sql = "ALTER TABLE `{$realTableName}` ADD COLUMN `{$data['field_name']}` {$data['field_type']} {$notNull} {$defaultValue} COMMENT '{$data['field_zhname']}'";
             if ($this->query($sql)) {
                 if ($this->insert($data) !== false) {
                     return true;
+                } else {
+                    $this->error = '失败，数据写入失败';
+                    return false;
                 }
             } else {
                 $this->error = '失败，请检查数据类型或字段是否存在';
@@ -59,15 +67,24 @@ class Field extends Model {
         $model = Loader::get('\Manage\Model\ContentModel');
         $realTableName = $model->getRealTableName($info['model_id']);
         $notNull = ($data['is_null']) ? '' : 'NOT NULL';
-        $defaultValue = ($data['default_value'] !== '') ? "DEFAULT '{$data['default_value']}'" : '';
-        $sql = "ALTER TABLE `{$realTableName}` CHANGE `{$info['field_name']}` `{$data['field_name']}` {$data['field_type']} {$notNull} {$defaultValue} COMMENT '{$data['field_zhname']}'";
-        if ($this->query($sql)) {
+        if (strtolower($data['default_value']) == 'null') {
+            $default = 'NULL';
+        } else {
+            $default = ((is_numeric($data['default_value'])) ? $data['default_value'] : '\'' . $data['default_value'] . '\'');
+        }
+        $defaultValue = (!$data['is_null'] && $default == 'NULL') ? '' : (($data['default_value'] !== '') ? "DEFAULT " . $default : '');
+        $sql = "ALTER TABLE `{$realTableName}` CHANGE `{$info['field_name']}` `{$info['field_name']}` {$data['field_type']} {$notNull} {$defaultValue} COMMENT '{$data['field_zhname']}'";
+        if ($this->query($sql) !== false) {
             if ($this->update($data, $id) !== false) {
                 return true;
+            } else {
+                $this->error = '失败，数据写入失败';
+                return false;
             }
+        } else {
+            $this->error = '失败，请检查数据类型或字段是否存在';
+            return false;
         }
-        $this->error = '失败，请检查数据类型或字段是否存在';
-        return false;
     }
 
     public function deleteField($id) {

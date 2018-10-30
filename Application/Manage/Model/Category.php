@@ -77,15 +77,27 @@ class Category extends Model {
         return false;
     }
 
+    /**
+     * 删除分类
+     * @param $id
+     * @return bool
+     * 获取表名需要查询分类数据，所以此处先删除记录
+     */
     public function deleteCategory($id) {
         if (is_array($id)) {
             for ($i = 0; $i < count($id); $i++) {
-                $this->delete((int)$id[$i]);
+                $id[$i] = (int)$id[$i];
+                $model = $this->getModelByCategoryId($id[$i]);
+                $model->where(['category_id' => $id[$i]])->delete();
+                $this->delete($id[$i]);
             }
             return true;
         } else {
-            if ($this->delete((int)$id)) {
-                return true;
+            $model = $this->getModelByCategoryId($id);
+            if ($model->where(['category_id' => $id])->delete()) {
+                if ($this->delete((int)$id)) {
+                    return true;
+                }
             }
             $this->error = '删除失败';
             return false;
@@ -113,5 +125,11 @@ class Category extends Model {
     public function getModelByCategoryId($id) {
         $table = $this->getTableNameByCategoryId($id);
         return new Model($table);
+    }
+
+
+    public function getChildCategoryById($id, $field = false) {
+        $child = $this->field($field)->where(['pid' => $id])->select();
+        return $child;
     }
 }
