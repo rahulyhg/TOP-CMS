@@ -1,6 +1,6 @@
 <?php
 /**
- * @author TOP糯米 <1130395124@qq.com> 2017
+ * @author TOP糯米 2017
  */
 
 namespace Top;
@@ -53,7 +53,7 @@ class Model {
      * @return array
      */
     public function getData() {
-        //初始化$data
+        // 初始化$data
         $data = [];
         if ($this->table) {
             $tableInfo = $this->getTableDesc($this->table);
@@ -77,7 +77,7 @@ class Model {
      */
     private function processMap($map) {
         $mapData = $_POST;
-        //遍历POST过来的数据
+        // 遍历POST过来的数据
         foreach ($mapData as $key => $value) {
             // 遍历数据库字段
             foreach ($map as $k => $v) {

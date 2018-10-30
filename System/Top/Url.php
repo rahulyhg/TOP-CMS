@@ -1,7 +1,14 @@
 <?php
+/**
+ * @author TOP糯米 2017
+ */
 
 namespace Top;
 
+/**
+ * URL处理类
+ * @author TOP糯米
+ */
 class Url {
 
     private function __construct() {
