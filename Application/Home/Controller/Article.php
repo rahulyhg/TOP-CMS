@@ -80,7 +80,7 @@ class Article extends Common {
     /**
      * 子分类下所有文档
      * @param string $category
-     * 暂时只能往下取一层
+     * 当前分类下所有子分类的文档（暂时只能往下取一层）
      */
     public function all($category = '') {
         // 当前分类信息
