@@ -1,6 +1,6 @@
 <?php
 /**
- * @author TOP糯米 <1130395124@qq.com> 2017
+ * @author TOP糯米 2017
  */
 
 namespace Top\Database\Driver;
