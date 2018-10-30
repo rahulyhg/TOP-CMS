@@ -1,4 +1,6 @@
 <?php
+// 还没完善,很多应该有的限制都没做
+
 // error_reporting(0);
 header('content-type: text/html; charset=utf-8');
 // 项目根目录

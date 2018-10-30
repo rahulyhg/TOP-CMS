@@ -14,6 +14,10 @@ return [
         '[category]',
         'Home/Article/lists'
     ],
+    'all' => [
+        '[category]',
+        'Home/Article/all'
+    ],
     'page' => [
         '[category]',
         'Home/Article/index'
@@ -37,32 +41,24 @@ return [
         null,
         'Home/Article/detail/category/synopsis/id/1'
     ],
-    'progress' => [
-        null,
-        'Home/Article/lists/category/progress'
-    ],
-    'culture' => [
-        null,
-        'Home/Article/detail/category/culture/id/5'
-    ],
-    'honor' => [
-        null,
-        'Home/Article/detail/category/honor/id/6'
-    ],
-    'customer' => [
-        null,
-        'Home/Article/detail/category/customer/id/7'
-    ],
-    'online' => [
-        null,
-        'Home/Article/detail/category/online/id/8'
-    ],
     'contact' => [
         null,
-        'Home/Article/index/category/contactus'
+        'Home/Article/detail/category/contact/id/2'
     ],
-    'recruit' => [
+    'environment' => [
         null,
-        'Home/Article/lists/category/recruit'
+        'Home/Article/lists/category/environment'
+    ],
+    'news' => [
+        null,
+        'Home/Article/lists/category/news'
+    ],
+    'search' => [
+        '[keywords]',
+        'Home/Article/search'
+    ],
+    'words' => [
+        null,
+        'Home/Words/index'
     ]
 ];

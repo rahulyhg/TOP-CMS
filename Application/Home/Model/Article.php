@@ -2,7 +2,6 @@
 
 namespace Home\Model;
 
-use Top\Config;
 use Top\Model;
 use Top\Loader;
 
@@ -27,5 +26,5 @@ class Article extends Model {
         }
         return $article;
     }
-    
+
 }

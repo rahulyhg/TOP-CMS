@@ -30,4 +30,10 @@ class Category extends Model {
         $lists = $model->getContentListByCategoryId($categoryId, $order, $limit, $count);
         return $lists;
     }
+
+    public function childCategoryIds($id) {
+        $model = Loader::get('\Manage\Model\Category');
+        $child = $model->getChildCategoryById($id, 'id');
+        return $child;
+    }
 }

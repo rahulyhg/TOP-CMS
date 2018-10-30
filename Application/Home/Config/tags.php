@@ -24,5 +24,5 @@ return [
     'article:category,id,name' => 'name = \Home\Helper::getArticle(category, id);',
 
 	'/(cover|hasnav)' => 'endif;',
-    '/(cate|nav|list)' => 'endforeach;'
+    '/(cate|nav|list|position)' => 'endforeach;'
 ];
