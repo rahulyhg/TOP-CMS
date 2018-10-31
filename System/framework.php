@@ -24,9 +24,9 @@ class App {
         // 设置时区
         date_default_timezone_set('PRC');
         // 注册自动加载类
-        require_once FRAMEWORK . 'Top/Loader.php';
+        require FRAMEWORK . 'Top/Loader.php';
         spl_autoload_register('Top\Loader::load');
-        require_once FRAMEWORK . 'Top/Functions/functions.php';
+        require FRAMEWORK . 'Top/Functions/functions.php';
         if(!defined('DEBUG')) define('DEBUG', false);
         (php_sapi_name() === 'cli') ? \Top\Command::build() : \Top\Router::build();
     }
