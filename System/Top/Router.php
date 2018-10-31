@@ -128,14 +128,15 @@ class Router {
             session_start();
         }
         $viewName = $_SERVER['REQUEST_URI'];
-        if (!\Top\Cache\ViewCache::getInstance()->check(md5($viewName)) || DEBUG === true) {
+        $cacheInstance = \Top\Cache\ViewCache::getInstance();
+        if (!$cacheInstance->check(md5($viewName)) || DEBUG === true) {
             $object = new $info['CLASS'];
             if (in_array('_init', self::$classMethods)) {
                 $object->_init();
             }
             call_user_func_array([$object, $info['FUNCTION']], $info['PARAM']);
         } else {
-            echo \Top\Cache\ViewCache::getInstance()->get(md5($viewName));
+            echo $cacheInstance->get(md5($viewName));
         }
     }
 }
