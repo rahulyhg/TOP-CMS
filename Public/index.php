@@ -13,5 +13,3 @@ define('FRAMEWORK', BASEPATH . 'System/');
 define('DEBUG', false);
 // 加载框架
 require_once FRAMEWORK . 'framework.php';
-// 开始
-App::start();

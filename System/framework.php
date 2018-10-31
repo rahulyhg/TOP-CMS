@@ -30,3 +30,5 @@ class App {
         (php_sapi_name() === 'cli') ? \Top\Command::build() : \Top\Router::build();
     }
 }
+// 开始
+App::start();
