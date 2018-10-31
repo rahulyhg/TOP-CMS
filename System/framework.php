@@ -2,7 +2,8 @@
 /**
  * @author TOP糯米 2017
  */
-
+if (!defined('BASEPATH'))
+    exit;
 /**
  * 框架入口
  * @author TOP糯米
