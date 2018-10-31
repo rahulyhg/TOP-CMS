@@ -62,12 +62,6 @@ class Page {
     /**
      * 获取分页HTML
      * @return string
-     * <div class='met_pager'>
-    <span class='PreSpan'>上一页</span>
-    <a class="Ahover">1</a>
-    <a href='list_19_2.html'>2</a>
-    <a href='list_19_2.html'>下一页</a>
-    </div>
      */
     public function homeShow() {
         $html = '<div class=\'met_pager\'>';
