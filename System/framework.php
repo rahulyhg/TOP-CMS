@@ -8,7 +8,7 @@ if (!defined('BASEPATH'))
  * 框架入口
  * @author TOP糯米
  * 我会坚持做我喜欢的事。
- * 2018-09-27 21:00 绵阳
+ * 2018-09-27 绵阳
  */
 
 // 框架版本
@@ -31,5 +31,5 @@ class App {
         (php_sapi_name() === 'cli') ? \Top\Command::build() : \Top\Router::build();
     }
 }
-// 开始
+// start
 App::start();
