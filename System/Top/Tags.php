@@ -112,7 +112,7 @@ class Tags {
         // 创建临时文件
         file_put_contents($tempFileName, $result);
         ob_start();
-        require_once $tempFileName;
+        require $tempFileName;
         // 拿到临时创建的文件内容
         $content = ob_get_contents();
         ob_clean();

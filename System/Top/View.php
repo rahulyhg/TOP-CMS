@@ -78,14 +78,14 @@ class View {
             $cacheInstance = \Top\Cache\ViewCache::getInstance();
             if (!$cacheInstance->check(md5($fileName))) { //检查缓存文件状态
                 ob_start();
-                require_once $fileName;
+                require $fileName;
                 $content = ob_get_contents();
                 ob_clean();
                 $cacheInstance->set(md5($uri), $content); //利用缓冲区拿到静态内容写入文件缓存
             }
             echo $cacheInstance->get(md5($uri)); //取缓存
         } else {
-            require_once $fileName; //直接拿文件
+            require $fileName; //直接拿文件
         }
     }
 }
