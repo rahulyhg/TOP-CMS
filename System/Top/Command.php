@@ -17,12 +17,12 @@ class Command {
         $params['c'] = (isset($params['c'])) ? $params['c'] : 'Index';
         $params['a'] = (isset($params['a'])) ? $params['a'] : 'index';
         $params['p'] = (isset($params['p'])) ? $params['p'] : '';
-        define('__MODULE__', $params['m']);
-        define('__CLASSNAME__', $params['c']);
-        define('__FUNCTIONNAME__', $params['a']);
+        define('MODULE', $params['m']);
+        define('CONTROLLER', $params['c']);
+        define('ACTION', $params['a']);
         $paramArr = explode('.', $params['p']);
-        $className = '\\' . $params['m'] . '\\Controller\\' . $params['c'];        
-        $paramName = (new \ReflectionMethod($className, __FUNCTIONNAME__))->getParameters();
+        $className = '\\' . $params['m'] . '\\Controller\\' . $params['c'];
+        $paramName = (new \ReflectionMethod($className, $params['a']))->getParameters();
         $paramNameArray = [];
         $param = [];
         for ($i = 0; $i < count($paramName); $i++) {
