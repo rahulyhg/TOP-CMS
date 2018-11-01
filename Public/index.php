@@ -12,4 +12,4 @@ define('FRAMEWORK', BASEPATH . 'System/');
 // DEBUG模式 （不生成缓存文件并且每次编译模板文件）
 define('DEBUG', false);
 // 加载框架
-require_once FRAMEWORK . 'framework.php';
+require FRAMEWORK . 'framework.php';
